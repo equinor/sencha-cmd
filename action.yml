@@ -1,0 +1,27 @@
+name: 'Sencha Cmd'
+description: 'Install and use latest Sencha Cmd into action script'
+inputs:
+  version:
+    description: 'Version of Sencha Cmd to use'
+    required: false
+    default: '7.3.0.19' # http://cdn.sencha.com/cmd/${{inputs.version}}/no-jre/SenchaCmd-${{inputs.version}}-linux-amd64.sh.zip
+outputs:
+  installed-path:
+    description: 'Location of installed cmd'
+    value: ${{ steps.install.outputs.path}}
+
+runs:
+  using: 'composite'
+
+  steps:
+    - run: echo $GITHUB_ENV
+      shell: bash
+      
+    - run: |
+        curl -O http://cdn.sencha.com/cmd/${{inputs.version}}/no-jre/SenchaCmd-${{inputs.version}}-linux-amd64.sh.zip --silent
+        unzip SenchaCmd-${{inputs.version}}-linux-amd64.sh.zip
+        chmod +x SenchaCmd-${{inputs.version}}-linux-amd64.sh
+        ./SenchaCmd-${{inputs.version}}-linux-amd64.sh -q
+        echo "/home/runner/bin/Sencha/Cmd/${{inputs.version}}" >> $GITHUB_PATH
+        rm SenchaCmd-${{inputs.version}}-linux-amd64.*
+      shell: bash
