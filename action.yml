@@ -15,10 +15,7 @@ runs:
 
   steps:
     - run: |
-        curl -O http://cdn.sencha.com/cmd/${{inputs.version}}/no-jre/SenchaCmd-${{inputs.version}}-linux-amd64.sh.zip --silent
-        unzip SenchaCmd-${{inputs.version}}-linux-amd64.sh.zip
-        chmod +x SenchaCmd-${{inputs.version}}-linux-amd64.sh
-        ./SenchaCmd-${{inputs.version}}-linux-amd64.sh -q
+        ${{ github.action_path}}/SenchaCmd-${{inputs.version}}-linux-amd64.sh -q
         echo "/home/runner/bin/Sencha/Cmd/${{inputs.version}}" >> $GITHUB_PATH
         rm SenchaCmd-${{inputs.version}}-linux-amd64.*
       shell: bash
