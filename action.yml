@@ -17,5 +17,4 @@ runs:
     - run: |
         ${{ github.action_path}}/SenchaCmd-${{inputs.version}}-linux-amd64.sh -q
         echo "/home/runner/bin/Sencha/Cmd/${{inputs.version}}" >> $GITHUB_PATH
-        rm SenchaCmd-${{inputs.version}}-linux-amd64.*
       shell: bash
